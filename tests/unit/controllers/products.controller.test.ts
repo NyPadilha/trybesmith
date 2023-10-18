@@ -4,7 +4,11 @@ import sinonChai from 'sinon-chai';
 import { Request, Response } from 'express';
 import productsService from '../../../src/services/products.service';
 import productsController from '../../../src/controllers/products.controller';
-import { createdProductService, createdProduct } from '../../mocks/products.mock';
+import { 
+  createdProductService, 
+  createdProduct,
+  getProductsService,
+} from '../../mocks/products.mock';
 
 chai.use(sinonChai);
 
@@ -31,7 +35,14 @@ describe('ProductsController', function () {
 
     expect(res.status).to.have.been.calledWith(201);
     expect(res.json).to.have.been.calledWith(createdProduct);
+  });
+  it('should get all products', async function () {
+    stub(productsService, 'getProducts').resolves(getProductsService);
 
+    await productsController.getProducts(req, res);
+
+    expect(res.status).to.have.been.calledWith(200);
+    expect(res.json).to.have.been.calledWith([createdProduct]);
   });
 
 });

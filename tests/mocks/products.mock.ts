@@ -9,3 +9,8 @@ export const createdProductService = {
     status: 201,
     data: createdProduct,
 };
+
+export const getProductsService = {
+    status: 200,
+    data: [createdProduct],
+};

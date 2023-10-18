@@ -23,5 +23,14 @@ describe('ProductsService', function () {
     expect(result).to.have.property('status').to.be.equal(201);
     expect(result).to.have.property('data').to.be.deep.equal(createdProduct);
   });
+  it('should get all products', async function () {
+    const productsMock = productsModel.build(createdProduct)
+    stub(productsModel, 'findAll').resolves([productsMock]);
+
+    const result = await productsService.getProducts();
+
+    expect(result).to.have.property('status').to.be.equal(200);
+    expect(result).to.have.property('data').to.be.deep.equal([productsMock]);
+  });
 
 });

@@ -1,4 +1,4 @@
-export type Service<T> = {
+export type Service = {
   status: number,
-  data: T
+  data?: unknown
 };
